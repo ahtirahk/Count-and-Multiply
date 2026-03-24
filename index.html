@@ -55,27 +55,21 @@
       let totalClicks = 0;
 
       function change(amount) {
-        count = count + amount;
-
-        // Challenge 2: stop at 10
-        if (count > 10) {
-          count = 10;
-          document.getElementById("max-msg").textContent = "max is 10!";
-        } else {
-          document.getElementById("max-msg").textContent = "";
+        // check BEFORE adding — if already at 10, block the + and show popup
+        if (count >= 10 && amount > 0) {
+          alert("Max limit reached! The maximum number is 10.");
+          return; // stops the function here, count does not change
         }
-
-        // Challenge 3: track every click
+      
+        count = count + amount;
         totalClicks = totalClicks + 1;
         document.getElementById("click-count").textContent = "total clicks: " + totalClicks;
-
         updateDisplay();
       }
 
       // Challenge 1: multiply by 2
       function multiply() {
-        count = count * 2;
-        if (count > 10) count = 10;
+        count = count * 2;             // no cap — 6 × 2 = 12 now works
         totalClicks = totalClicks + 1;
         document.getElementById("click-count").textContent = "total clicks: " + totalClicks;
         updateDisplay();
